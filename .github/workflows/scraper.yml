@@ -1,0 +1,34 @@
+name: YouTube Discord Scraper
+
+on:
+  schedule:
+    - cron: '*/30 * * * *' # Ejecuta el bot cada 30 minutos automáticamente
+  workflow_dispatch: # Permite ejecutar el script manualmente desde la pestaña Actions
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # Requisito obligatorio para poder hacer el commit
+
+    steps:
+      - name: Checkout del repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Ejecutar Scraper
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        run: python scraper.py
+
+      - name: Guardar historial en el repositorio
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          touch sent_videos.txt
+          git add sent_videos.txt
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Actualizar registro de vídeos" && git push)
