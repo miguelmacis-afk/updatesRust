@@ -7,7 +7,7 @@ import xml.etree.ElementTree as ET
 CHANNEL_ID = "UC_RMVRpdbg9EPeEMxF5f-Fw" # ID extraído del canal @Triko_ez
 RSS_URL = f"https://www.youtube.com/feeds/videos.xml?channel_id={CHANNEL_ID}"
 WEBHOOK_URL = os.environ.get("DISCORD_WEBHOOK_URL")
-KEYWORDS = ["drop", "forced", "forzado", "actualizacion", "actualización"]
+KEYWORDS = ["drop", "forced", "forzado", "actualizacion", "actualización", "update"]
 DB_FILE = "sent_videos.txt"
 
 def load_sent_videos():
