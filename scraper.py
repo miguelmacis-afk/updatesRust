@@ -29,7 +29,7 @@ def send_to_discord(video_url, title):
         "content": f"@everyone \n**{title}**\n{video_url}",
         "username": "Alerta Triko_ez"
     }
-    e
+   
     req = urllib.request.Request(WEBHOOK_URL, method="POST")
     req.add_header('Content-Type', 'application/json')
     req.add_header('User-Agent', 'Mozilla/5.0')
